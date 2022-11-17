@@ -3,7 +3,6 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 
 class TurnPageView extends StatefulWidget {
-
   List<Color> data = [Colors.yellow, Colors.red, Colors.green];
 
   TurnPageView({Key key}) : super(key: key);
@@ -65,11 +64,11 @@ class _TurnPageViewState extends State<TurnPageView>
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.end,
           children: <Widget>[
-            FlatButton(
+            TextButton(
               child: Text("PREV"),
               onPressed: prev,
             ),
-            FlatButton(
+            TextButton(
               child: Text("NEXT"),
               onPressed: next,
             ),

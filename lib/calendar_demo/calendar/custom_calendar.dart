@@ -65,8 +65,11 @@ class Painter extends ChangeNotifier implements CustomPainter {
   Function onSelectDay;
   List<Offset> selectedPositions;
 
-
-  Painter({this.nameOfEndDay, this.startDayIndex, this.onSelectDay, this.selectedPositions}) {
+  Painter(
+      {this.nameOfEndDay,
+      this.startDayIndex,
+      this.onSelectDay,
+      this.selectedPositions}) {
     _paint = Paint()
       ..color = Colors.black
       ..strokeWidth = 1.0
@@ -90,7 +93,7 @@ class Painter extends ChangeNotifier implements CustomPainter {
     var dx = (position.dx ~/ (w / 7)) * (w / 7);
     var dy = (position.dy ~/ t) * t;
 
-    if(dx < 5 * w / 7 && dy >= h / (5 + 1)) {
+    if (dx < 5 * w / 7 && dy >= h / (5 + 1)) {
       Offset temp = new Offset(dx, dy);
       if (selectedPositions.indexOf(temp) == -1) {
         selectedPositions.add(temp);
@@ -179,8 +182,8 @@ class Painter extends ChangeNotifier implements CustomPainter {
         _paintFillWeekend);
 
     selectedPositions.forEach((position) {
-      if((position.dy == 50.0 && position.dx < startDayIndex * w / 7) || (position.dy == 75.0 && position.dx < startDayIndex * w / 7)) {
-
+      if ((position.dy == 50.0 && position.dx < startDayIndex * w / 7) ||
+          (position.dy == 75.0 && position.dx < startDayIndex * w / 7)) {
       } else {
         canvas.drawRect(
             Rect.fromPoints(
@@ -205,22 +208,16 @@ class Painter extends ChangeNotifier implements CustomPainter {
         drawTextDate(
             canvas,
             size,
-            Offset(
-                (i + startDayIndex) * w / 7,
-                h / (numberOfRowLine + 1)),
+            Offset((i + startDayIndex) * w / 7, h / (numberOfRowLine + 1)),
             (i + today - nameOfEndDay).toString(),
-            i == 0 ? Colors.red : Colors.black
-        );
+            i == 0 ? Colors.red : Colors.black);
       } else {
         drawTextDate(
             canvas,
             size,
-            Offset(
-                (i + startDayIndex) * w / 7,
-                h / (numberOfRowLine + 1)),
+            Offset((i + startDayIndex) * w / 7, h / (numberOfRowLine + 1)),
             (i + today).toString(),
-            i == 0 ? Colors.red : Colors.black
-        );
+            i == 0 ? Colors.red : Colors.black);
       }
     }
     //2nd line
@@ -230,16 +227,14 @@ class Painter extends ChangeNotifier implements CustomPainter {
             canvas,
             size,
             Offset(
-                (i - 7 + startDayIndex) * w / 7,
-                2 * h / (numberOfRowLine + 1)),
+                (i - 7 + startDayIndex) * w / 7, 2 * h / (numberOfRowLine + 1)),
             (i + today - nameOfEndDay).toString());
       } else {
         drawTextDate(
             canvas,
             size,
             Offset(
-                (i - 7 + startDayIndex) * w / 7,
-                2 * h / (numberOfRowLine + 1)),
+                (i - 7 + startDayIndex) * w / 7, 2 * h / (numberOfRowLine + 1)),
             (i + today).toString());
       }
     }
@@ -249,16 +244,14 @@ class Painter extends ChangeNotifier implements CustomPainter {
         drawTextDate(
             canvas,
             size,
-            Offset(
-                (i - 14 + startDayIndex) * w / 7,
+            Offset((i - 14 + startDayIndex) * w / 7,
                 3 * h / (numberOfRowLine + 1)),
             (i + today - nameOfEndDay).toString());
       } else {
         drawTextDate(
             canvas,
             size,
-            Offset(
-                (i - 14 + startDayIndex) * w / 7,
+            Offset((i - 14 + startDayIndex) * w / 7,
                 3 * h / (numberOfRowLine + 1)),
             (i + today).toString());
       }
@@ -269,16 +262,14 @@ class Painter extends ChangeNotifier implements CustomPainter {
         drawTextDate(
             canvas,
             size,
-            Offset(
-                (i - 21 + startDayIndex) * w / 7,
+            Offset((i - 21 + startDayIndex) * w / 7,
                 4 * h / (numberOfRowLine + 1)),
             (i + today - nameOfEndDay).toString());
       } else {
         drawTextDate(
             canvas,
             size,
-            Offset(
-                (i - 21 + startDayIndex) * w / 7,
+            Offset((i - 21 + startDayIndex) * w / 7,
                 4 * h / (numberOfRowLine + 1)),
             (i + today).toString());
       }
@@ -307,21 +298,23 @@ class Painter extends ChangeNotifier implements CustomPainter {
 
   void drawTextDate(Canvas canvas, Size size, Offset offset, String text,
       [Color color = Colors.black]) {
-
     TextPainter tp = new TextPainter(
-        text: new TextSpan(style: new TextStyle(color: color, fontSize: 12.0), text: text),
+        text: new TextSpan(
+            style: new TextStyle(color: color, fontSize: 12.0), text: text),
         textAlign: TextAlign.center,
         textDirection: TextDirection.ltr);
     tp.layout();
 
     TextPainter tpMorning = new TextPainter(
-        text: new TextSpan(style: new TextStyle(color: color, fontSize: 12.0), text: '☀'),
+        text: new TextSpan(
+            style: new TextStyle(color: color, fontSize: 12.0), text: '☀'),
         textAlign: TextAlign.center,
         textDirection: TextDirection.ltr);
     tpMorning.layout();
 
     TextPainter tpAfternoon = new TextPainter(
-        text: new TextSpan(style: new TextStyle(color: color, fontSize: 12.0), text: '🌙'),
+        text: new TextSpan(
+            style: new TextStyle(color: color, fontSize: 12.0), text: '🌙'),
         textAlign: TextAlign.center,
         textDirection: TextDirection.ltr);
     tpAfternoon.layout();
@@ -329,7 +322,7 @@ class Painter extends ChangeNotifier implements CustomPainter {
     double dx = offset.dx + 6.0;
     double dy = offset.dy + 4.0;
 
-    if(offset.dx < 5 * size.width / 7) {
+    if (offset.dx < 5 * size.width / 7) {
       tpMorning.paint(canvas, Offset(dx + 25.0, dy - 4.0));
       tpAfternoon.paint(canvas, Offset(dx + 25.0, dy + 25.0));
     }
@@ -359,7 +352,8 @@ class SelectedDateInfo {
 
   SelectedDateInfo({this.day, this.session});
 
-  bool operator ==(o) => o is SelectedDateInfo && day == o.day && session == o.session;
+  bool operator ==(o) =>
+      o is SelectedDateInfo && day == o.day && session == o.session;
   int get hashCode => hash2(day.hashCode, session.hashCode);
 }
 
